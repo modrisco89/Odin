@@ -26,7 +26,7 @@
   </form>
 </section>
 
-{{#if userAdmin}}
+
 <section class="section">
   <h1 class="title">Admin Settings</h1>
   
@@ -43,7 +43,7 @@
   </thead>
   <tbody>
     {{#each users}}
-    {{#unless admin}}
+
       <tr>
         <td>
           {{firstName}}
@@ -72,11 +72,10 @@
           </a>
         </td>
       </tr>
-      {{/unless}}
+
 
     {{/each}}
   </tbody>
 </table>
 
 </section>
-{{/if}}

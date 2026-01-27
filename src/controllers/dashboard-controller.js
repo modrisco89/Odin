@@ -12,11 +12,18 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const adminInfo = await db.adminStore.getAlladmins();
       const ec2s = await db.ec2Store.getAllEc2s();
+      const uptimes = ec2s
+      const mems = ec2s
+      const lastUptime = uptimes.pop().uptime;
+      const lastUptimeSliced = lastUptime.slice(3, lastUptime.length)
+      const lastMemory = mems.pop().memUsed;
       const viewData = {
         title: "Odin Dashboard",
         user: loggedInUser,
         adminInfo: adminInfo,
         ec2s: ec2s,
+        uptime: lastUptimeSliced,
+        memory: lastMemory,
       };
       return h.view("dashboard-view", viewData);
     },

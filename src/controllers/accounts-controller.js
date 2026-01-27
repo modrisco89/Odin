@@ -9,13 +9,13 @@ export const accountsController = {
   index: {
     auth: false,
     handler: function (request, h) {
-      return h.view("main", { title: "Welcome to venue" });
+      return h.view("main", { title: "Welcome to Odin" });
     },
   },
   showSignup: {
     auth: false,
     handler: function (request, h) {
-      return h.view("signup-view", { title: "Sign up for venue" });
+      return h.view("signup-view", { title: "Sign up for Odin" });
     },
   },
   signup: {
@@ -36,7 +36,7 @@ export const accountsController = {
   showLogin: {
     auth: false,
     handler: function (request, h) {
-      return h.view("login-view", { title: "Login to venue" });
+      return h.view("login-view", { title: "Login to Odin" });
     },
   },
   login: {
@@ -86,6 +86,7 @@ export const accountsController = {
     const users = await db.userStore.getAllUsers();
     
     const viewData = {
+      title: "Odin Settings",
       users: users,
       userEmail: user.email,
       userName: user.firstName,
