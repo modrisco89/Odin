@@ -5,7 +5,8 @@ import { imageStore } from "../models/image-store.js";
 import { db } from "../models/db.js";
 
 const require = createRequire(import.meta.url);
-
+let count=0;
+let flag = false;
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
@@ -14,9 +15,22 @@ export const dashboardController = {
       const ec2s = await db.ec2Store.getAllEc2s();
       const uptimes = ec2s
       const mems = ec2s
+      const cpus = ec2s
       const lastUptime = uptimes.pop().uptime;
       const lastUptimeSliced = lastUptime.slice(3, lastUptime.length)
       const lastMemory = mems.pop().memUsed;
+      
+      if (cpus.pop().CPU === "100"){
+        count += 1;
+      }
+      else{
+        count = 0;
+        flag = false;
+      }
+      if (count > 3){
+        flag = true;
+      }
+
       const viewData = {
         title: "Odin Dashboard",
         user: loggedInUser,
@@ -24,6 +38,7 @@ export const dashboardController = {
         ec2s: ec2s,
         uptime: lastUptimeSliced,
         memory: lastMemory,
+        flag: flag,
       };
       return h.view("dashboard-view", viewData);
     },

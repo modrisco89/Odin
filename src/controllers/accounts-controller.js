@@ -142,7 +142,6 @@ export const accountsController = {
   deleteUser: {
     handler: async function (request, h) {
       await db.userStore.deleteUserById(request.params.userid);
-      await db.venueStore.deleteAllVenuesByUserId(request.params.userid);
       return h.redirect("/settings");
     },
   },

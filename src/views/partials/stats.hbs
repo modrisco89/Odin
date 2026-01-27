@@ -18,6 +18,14 @@
     </div>
   </article>
 </div></div>
+<div class="column is-1 is-vcentered"><div class="buttons are-large is-centered">
+  {{#unless flag}}
+  <button class="button is-success is-vcentered">OK</button>
+  {{/unless}}
+  {{#if flag}}
+  <button class="button is-danger is-vcentered">BAD</button>
+  {{/if}}
+</div></div>
   <div class="column"><div class="box">
   <article class="media">
     <div class="media-left">
@@ -37,3 +45,6 @@
   </article>
 </div></div>
 </div>
+
+
+
