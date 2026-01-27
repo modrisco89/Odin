@@ -1,3 +1,4 @@
+
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -8,21 +9,30 @@
   const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: [{{#each ec2s}}'{{time}}'{{#unless @last}}, {{/unless}}{{/each}}],
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: 'CPU',
+        data: [{{#each ec2s}}{{CPU}}{{#unless @last}}, {{/unless}}{{/each}}],
         borderWidth: 1
       }]
     },
     options: {
+      animation: false,
+      scaleShowLabels : false,
       scales: {
+        x: {
+          display: false
+        },
         y: {
           beginAtZero: true
         }
       }
     }
   });
+  setInterval(() => {
+location.reload();
+}, 30000);
 </script>
+

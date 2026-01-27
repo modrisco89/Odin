@@ -1,11 +1,6 @@
 {{> menu active="dashboard"}}
 
 <section class="section">
-  {{#if user.admin}}
-  {{> list-analytics}}
-  {{/if}}
-  {{#unless user.admin}}
-  {{> graph}}
-  {{/unless}}
-
+ {{> list-analytics}}
+ {{> graph}}
 </section>

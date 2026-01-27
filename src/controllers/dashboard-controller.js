@@ -11,12 +11,12 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const adminInfo = await db.adminStore.getAlladmins();
-      const venues = await db.venueStore.getUservenues(loggedInUser._id);
+      const ec2s = await db.ec2Store.getAllEc2s();
       const viewData = {
-        title: "Venuely Dashboard",
+        title: "Odin Dashboard",
         user: loggedInUser,
         adminInfo: adminInfo,
-        venues: venues,
+        ec2s: ec2s,
       };
       return h.view("dashboard-view", viewData);
     },
