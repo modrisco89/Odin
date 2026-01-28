@@ -3,6 +3,7 @@ import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { venueController } from "./controllers/venue-controller.js";
 import { infoController } from "./controllers/info-controller.js";
+import { historyController } from "./controllers/history-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -18,7 +19,8 @@ export const webRoutes = [
  { method: "POST", path: "/updateuser/{userid}", config: accountsController.updateUser },
 
   { method: "GET", path: "/about", config: aboutController.index },
-
+  { method: "GET", path: "/history", config: historyController.index },
+  { method: "GET", path: "/history/clearlog", config: historyController.clearLog },
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addvenue", config: dashboardController.addvenue },
   { method: "GET", path: "/dashboard/deletevenue/{id}", config: dashboardController.deletevenue },

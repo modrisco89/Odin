@@ -3,18 +3,8 @@ import Mongoose from "mongoose";
 const { Schema } = Mongoose;
 
 const infoSchema = new Schema({
-  artist: String,
-  price: Number,
   date: String,
-  genre: String,
-  venueid: {
-    type: Schema.Types.ObjectId,
-    ref: "venue",
-  },
-  userid: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  opinion: String,
 });
 
 // export const Info = Mongoose.model("opinions", infoSchema);

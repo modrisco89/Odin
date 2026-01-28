@@ -1,0 +1,26 @@
+{{> menu active="history"}}
+
+<table class="table is-fullwidth">
+  <h1 class="title">Opinion Log</h1>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Opinion</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each Info}}
+      <tr>
+        <td>
+          {{date}}
+        </td>
+        <td>
+          {{opinion}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<form action="/history/clearlog" method="GET">
+<button class="button is-link">Clear Opinion Log</button>
+</form>

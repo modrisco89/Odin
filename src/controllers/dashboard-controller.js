@@ -20,8 +20,8 @@ export const dashboardController = {
       const lastUptime = uptimes.pop().uptime;
       const lastUptimeSliced = lastUptime.slice(3, lastUptime.length)
       const lastMemory = mems.pop().memUsed;
-      const lastOpinion = opinions.pop().opinion;
-      const lastOpinionDate = opinions.pop().date;
+      const lastOpinion = opinions.pop()?.opinion;
+      const lastOpinionDate = opinions.pop()?.date;
       if (cpus.pop().CPU === "100"){
         count += 1;
       }
