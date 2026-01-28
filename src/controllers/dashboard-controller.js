@@ -13,13 +13,15 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const adminInfo = await db.adminStore.getAlladmins();
       const ec2s = await db.ec2Store.getAllEc2s();
+      const opinions = await db.infoStore.getAllinfos();      
       const uptimes = ec2s
       const mems = ec2s
       const cpus = ec2s
       const lastUptime = uptimes.pop().uptime;
       const lastUptimeSliced = lastUptime.slice(3, lastUptime.length)
       const lastMemory = mems.pop().memUsed;
-      
+      const lastOpinion = opinions.pop().opinion;
+      const lastOpinionDate = opinions.pop().date;
       if (cpus.pop().CPU === "100"){
         count += 1;
       }
@@ -27,7 +29,7 @@ export const dashboardController = {
         count = 0;
         flag = false;
       }
-      if (count > 3){
+      if (count > 10){
         flag = true;
       }
 
@@ -38,6 +40,8 @@ export const dashboardController = {
         ec2s: ec2s,
         uptime: lastUptimeSliced,
         memory: lastMemory,
+        opinion: lastOpinion,
+        opinionDate: lastOpinionDate,
         flag: flag,
       };
       return h.view("dashboard-view", viewData);
