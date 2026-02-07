@@ -7,6 +7,7 @@ const ec2Schema = new Schema({
   cpu: String,
   uptime: String,
   memUsed: String,
+  storUsed: String,
 });
 
 export const Ec2 = Mongoose.model("Ec2", ec2Schema, "instanceStats");

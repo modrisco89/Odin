@@ -1,0 +1,64 @@
+
+<nav class="level">
+<div class="level-item has-text-centered">
+  <canvas id="myChart_doughnut" ></canvas>
+</div>
+
+<div class="level-item has-text-centered">
+  <canvas id="myChart_pie" ></canvas>
+</div>
+</nav>
+
+<script>
+  const ctx_doughnut = document.getElementById('myChart_doughnut');
+  const ctx2_pie = document.getElementById('myChart_pie');
+
+
+  new Chart(ctx_doughnut, {
+    type: 'doughnut',
+    data: {
+          labels: [
+    'Used Memory (%)',
+    'Free Memory (%)'
+  ],
+      datasets: [{
+        data: [{{usedMemory}}, {{freeMemory}}],
+        backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+    ],
+       hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: false,
+      radius: 120,
+      animation: false,
+    }
+  });
+
+
+  new Chart(ctx2_pie, {
+    type: 'pie',
+    data: {
+          labels: [
+    'Used Database Storage (%)',
+    'Free Database Storage (%)'
+  ],
+      datasets: [{
+        data: [{{usedStor}}, {{freeStor}}],
+        backgroundColor: [
+      'rgb(155, 89, 182)',
+      'rgb(46, 204, 113)',
+    ],
+       hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: false,
+      radius: 120,
+      animation: false,
+    }
+  });
+</script>
+

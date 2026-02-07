@@ -17,9 +17,15 @@ export const dashboardController = {
       const uptimes = ec2s
       const mems = ec2s
       const cpus = ec2s
+      const stors = ec2s
       const lastUptime = uptimes.pop().uptime;
-      const lastUptimeSliced = lastUptime.slice(3, lastUptime.length)
+      const lastUptimeSliced = lastUptime.slice(3, lastUptime.length);
       const lastMemory = mems.pop().memUsed;
+      const numlastMemory = Number(lastMemory.slice(0, 5));
+      const freeMemory = 100 - numlastMemory;
+      const lastStor = stors.pop().storUsed;
+      const numlastStor = Number(lastStor.slice(0, 2));
+      const freeStor = 100 - numlastStor;
       const lastOpinion = opinions.pop()?.opinion;
       const lastOpinionDate = opinions.pop()?.date;
       if (cpus.pop().CPU === "100"){
@@ -40,6 +46,10 @@ export const dashboardController = {
         ec2s: ec2s,
         uptime: lastUptimeSliced,
         memory: lastMemory,
+        freeMemory: freeMemory,
+        usedMemory: numlastMemory,
+        freeStor: freeStor,
+        usedStor: numlastStor,
         opinion: lastOpinion,
         opinionDate: lastOpinionDate,
         flag: flag,
