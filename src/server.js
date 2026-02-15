@@ -10,7 +10,7 @@ import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
-
+import { exec } from "child_process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -25,6 +25,9 @@ async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
   });
+  exec('python3 agent.py', (error ,stdout,stderr)=> {});
+  exec('python3 test.py', (error ,stdout,stderr)=> {});
+  
 
   await server.register(Vision);
   await server.register(Cookie);
