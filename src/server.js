@@ -26,7 +26,7 @@ async function init() {
     port: process.env.PORT || 3000,
   });
   exec('python3 agent.py', (error ,stdout,stderr)=> {});
-  exec('python3 test.py', (error ,stdout,stderr)=> {});
+  exec('python3 collector.py', (error ,stdout,stderr)=> {});
   
 
   await server.register(Vision);

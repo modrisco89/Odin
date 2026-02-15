@@ -11,8 +11,21 @@
           <strong>Odin's Comment</strong> <small>{{opinionDate}}</small>
           <br />
           {{opinion}}
+
         </p>
       </div>
     </div>
+  {{#if rebootRequired}}
+  <button onclick="runScript();"class="button is-danger is-pulled-right">Reboot</button>
+  {{/if}}
   </article>
+
 </div>
+  
+
+ <script>
+  function runScript(){
+    const { exec } = require('child_process');
+    exec('python3 reboot.py', (error ,stdout,stderr)=> {});
+  }
+ </script> 

@@ -28,6 +28,7 @@ export const dashboardController = {
       const freeStor = 100 - numlastStor;
       const lastOpinion = opinions.pop()?.opinion;
       const lastOpinionDate = opinions.pop()?.date;
+      const rebootRequired = opinions.pop()?.rebootRequired;
       if (cpus.pop().CPU === "100"){
         count += 1;
       }
@@ -52,6 +53,7 @@ export const dashboardController = {
         usedStor: numlastStor,
         opinion: lastOpinion,
         opinionDate: lastOpinionDate,
+        rebootRequired: rebootRequired,
         flag: flag,
       };
       return h.view("dashboard-view", viewData);
