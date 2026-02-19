@@ -22,12 +22,15 @@ if (result.error) {
 }
 
 async function init() {
+
   const server = Hapi.server({
     port: process.env.PORT || 3000,
   });
-  exec('python3 agent.py', (error ,stdout,stderr)=> {});
-  exec('python3 collector.py', (error ,stdout,stderr)=> {});
-  
+ 
+   exec('python3 collector.py', (error ,stdout,stderr)=> { });
+   console.log("Collector Script Running!");
+   exec('python3 agent.py', (error ,stdout,stderr)=> {});
+   console.log("Agent Script Running!");
 
   await server.register(Vision);
   await server.register(Cookie);

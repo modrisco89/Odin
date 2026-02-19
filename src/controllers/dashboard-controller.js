@@ -155,6 +155,14 @@ export const dashboardController = {
     },
   },
 
+    reboot: {
+    handler: async function (request, h) {
+      const { exec } = require('child_process');
+      exec('python3 reboot.py', (error ,stdout,stderr)=> {});
+      return h.redirect("/dashboard");
+    },
+  },
+
   clearLog: {
     handler: async function (request, h) {
       await db.adminStore.deleteAlladmins();

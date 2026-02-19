@@ -16,16 +16,10 @@
       </div>
     </div>
   {{#if rebootRequired}}
-  <button onclick="runScript();"class="button is-danger is-pulled-right">Reboot</button>
+  <form action="/dashboard/reboot" method="GET">
+  <button class="button is-danger is-pulled-right" onclick="runScript()" >Reboot</button>
+  </form>
   {{/if}}
   </article>
 
 </div>
-  
-
- <script>
-  function runScript(){
-    const { exec } = require('child_process');
-    exec('python3 reboot.py', (error ,stdout,stderr)=> {});
-  }
- </script> 

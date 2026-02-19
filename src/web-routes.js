@@ -21,6 +21,8 @@ export const webRoutes = [
   { method: "GET", path: "/about", config: aboutController.index },
   { method: "GET", path: "/history", config: historyController.index },
   { method: "GET", path: "/history/clearlog", config: historyController.clearLog },
+  
+  { method: "GET", path: "/dashboard/reboot", config: dashboardController.reboot },
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addvenue", config: dashboardController.addvenue },
   { method: "GET", path: "/dashboard/deletevenue/{id}", config: dashboardController.deletevenue },

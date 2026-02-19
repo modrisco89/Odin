@@ -14,11 +14,11 @@ from langchain.agents import create_agent
 from bson import json_util
 
 from dotenv import load_dotenv
-
+reboot = False;
 load_dotenv()
 
-ec2db = "50.17.53.205"
-ec2 = "34.224.65.148"
+ec2db = "54.158.47.100"
+ec2 = "50.19.4.28"
 
 myclient = pymongo.MongoClient("mongodb://" + ec2db +":27017/")
 mydb = myclient["ODIN"]
@@ -48,16 +48,22 @@ def determine_reboot():
 	global reboot
 	reboot = True
 	return reboot
+	
+def reboot_not_needed():
+	"""set reboot to false"""
+	global reboot
+	reboot = False
+	return reboot
 		
-TOOLS = [give_data, determine_reboot]
+TOOLS = [give_data, determine_reboot, reboot_not_needed]
 
 llm = ChatOpenAI(model="gpt-4", temperature=0)
 
 SYSTEM_MESSAGE = (
     "You are Odin, a helpful assistant that monitors system health. "
     "You will also try to read data from give_data, this will give you a dataset about CPU, used memory percentage and uptime of a server, and tell me about the data if the data is healthy or not"
-    "You will also determine_reboot by setting reboot to true if there are 10 consecutive datapoints in the latest 10 data points from give_data of CPU containing 100% spikes"
-    "You will also give important statistics on the dataset"
+    "You will also determine_reboot by setting reboot to true if there are 10 consecutive datapoints in the latest 10 data points from give_data of CPU containing 100 percent spikes, otherwise check if reboot_not_needed"
+    "You will also give important statistics on the dataset" 
     "storUsed is database storage, it's a seperate server"
 )
 
@@ -86,7 +92,7 @@ if __name__ == "__main__":
     history: List[BaseMessage] = []
 
     while True:
-        user_input = "From the dataset, tell me if I should be worried or not (note storUsed is on a seperate server known as a ""Database"", and determine a reboot if the latest 10 data points have consecutive CPU 100% spikes in a row without my consent if necessary but always check the history to ensure you have not done so already, also tell what percentage of the dataset had 100% CPU spikes, Also say it like your a god, since you're name is Odin".strip()
+        user_input = "From the dataset, tell me if I should be worried or not (note storUsed is on a seperate server known as a ""Database"", and determine a reboot only if the latest 10 data points have consecutive CPU 100% spikes in a row otherwise determine if a reboot is not needed, Also say it like your a god, since you're name is Odin".strip()
         print("Odin is analzing data")
         print("Odin: ", end="", flush=True)
         response = run_agent(user_input, history)
@@ -96,4 +102,4 @@ if __name__ == "__main__":
         myColOpinion.insert_one(mydict)
         # Update conversation history
         history += [HumanMessage(content=user_input), response]
-        time.sleep(120)
+        time.sleep(300)
