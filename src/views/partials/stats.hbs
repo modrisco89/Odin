@@ -19,10 +19,10 @@
   </article>
 </div></div>
 <div class="column is-1 is-vcentered"><div class="buttons are-large is-centered">
-  {{#unless flag}}
+  {{#unless rebootRequired}}
   <button class="button is-success is-vcentered">OK</button>
   {{/unless}}
-  {{#if flag}}
+  {{#if rebootRequired}}
   <button class="button is-danger is-vcentered">BAD</button>
   {{/if}}
 </div></div>

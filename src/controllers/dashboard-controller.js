@@ -5,7 +5,7 @@ import { imageStore } from "../models/image-store.js";
 import { db } from "../models/db.js";
 
 const require = createRequire(import.meta.url);
-let count=0;
+let rebootRequired = false;
 let flag = false;
 export const dashboardController = {
   index: {
@@ -14,30 +14,23 @@ export const dashboardController = {
       const adminInfo = await db.adminStore.getAlladmins();
       const ec2s = await db.ec2Store.getAllEc2s();
       const opinions = await db.infoStore.getAllinfos();      
-      const uptimes = ec2s
-      const mems = ec2s
-      const cpus = ec2s
-      const stors = ec2s
-      const lastUptime = uptimes.pop().uptime;
-      const lastUptimeSliced = lastUptime.slice(3, lastUptime.length);
-      const lastMemory = mems.pop().memUsed;
+      const latestEc2 = ec2s.at(-1);
+      const lastUptime = latestEc2?.uptime;
+      const lastUptimeSliced = lastUptime.slice(3, lastUptime?.length);
+      const lastMemory = latestEc2?.memUsed;
       const numlastMemory = Number(lastMemory.slice(0, 5));
       const freeMemory = 100 - numlastMemory;
-      const lastStor = stors.pop().storUsed;
+      const lastStor = latestEc2?.storUsed;
       const numlastStor = Number(lastStor.slice(0, 2));
       const freeStor = 100 - numlastStor;
-      const lastOpinion = opinions.pop()?.opinion;
-      const lastOpinionDate = opinions.pop()?.date;
-      const rebootRequired = opinions.pop()?.rebootRequired;
-      if (cpus.pop().CPU === "100"){
-        count += 1;
+      const lastOp = opinions.pop();
+      const lastOpinion = lastOp?.opinion;
+      const lastOpinionDate = lastOp?.date;
+      if (lastUptime === "up 10 minutes"){
+      flag = false;
       }
-      else{
-        count = 0;
-        flag = false;
-      }
-      if (count > 10){
-        flag = true;
+      if (flag===false){
+      rebootRequired = lastOp?.rebootRequired;
       }
 
       const viewData = {
@@ -54,7 +47,6 @@ export const dashboardController = {
         opinion: lastOpinion,
         opinionDate: lastOpinionDate,
         rebootRequired: rebootRequired,
-        flag: flag,
       };
       return h.view("dashboard-view", viewData);
     },
@@ -159,6 +151,8 @@ export const dashboardController = {
     handler: async function (request, h) {
       const { exec } = require('child_process');
       exec('python3 reboot.py', (error ,stdout,stderr)=> {});
+      rebootRequired = false;
+      flag = true;
       return h.redirect("/dashboard");
     },
   },

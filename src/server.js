@@ -26,7 +26,7 @@ const delay = (delayInms) => {return new Promise(resolve => setTimeout(resolve, 
 async function init() {
    exec('python3 dbstart.py', (error ,stdout,stderr)=> { });
    console.log("Waiting on Database to start");
-   let delayDb = await delay(30000);
+   let delayDb = await delay(10000);
    console.log("Database is Running!");
 
    exec('python3 collector.py', (error ,stdout,stderr)=> { });
