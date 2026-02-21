@@ -1,9 +1,13 @@
 import pymongo
+import os
 import subprocess #used to run commands from python
 import time #used for the delay to wait for the web server to be up and running
 from datetime import datetime
-ec2 = "50.19.4.28"
-ec2db = "54.158.47.100"
+from dotenv import load_dotenv
+load_dotenv()
+
+ec2db = os.environ.get("dbIp")
+ec2 = os.environ.get("sIp")
 
 cpu_cmd = [
     "ssh",

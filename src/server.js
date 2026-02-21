@@ -21,16 +21,23 @@ if (result.error) {
   process.exit(1);
 }
 
-async function init() {
+const delay = (delayInms) => {return new Promise(resolve => setTimeout(resolve, delayInms));};
 
-  const server = Hapi.server({
-    port: process.env.PORT || 3000,
-  });
- 
+async function init() {
+   exec('python3 dbstart.py', (error ,stdout,stderr)=> { });
+   console.log("Waiting on Database to start");
+   let delayDb = await delay(30000);
+   console.log("Database is Running!");
+
    exec('python3 collector.py', (error ,stdout,stderr)=> { });
    console.log("Collector Script Running!");
    exec('python3 agent.py', (error ,stdout,stderr)=> {});
    console.log("Agent Script Running!");
+  const server = Hapi.server({
+    port: process.env.PORT || 3000,
+  });
+ 
+
 
   await server.register(Vision);
   await server.register(Cookie);

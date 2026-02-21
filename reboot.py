@@ -1,6 +1,10 @@
 
 import subprocess #used to run commands from python
-ec2 = "50.19.4.28"
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+ec2 = os.environ.get("sIp")
 
 reboot_cmd = [
     "ssh",

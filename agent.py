@@ -1,5 +1,6 @@
 from typing import List
 import json
+import os
 import time
 import random
 import string
@@ -17,8 +18,8 @@ from dotenv import load_dotenv
 reboot = False;
 load_dotenv()
 
-ec2db = "54.158.47.100"
-ec2 = "50.19.4.28"
+ec2db = os.environ.get("dbIp")
+ec2 = os.environ.get("sIp")
 
 myclient = pymongo.MongoClient("mongodb://" + ec2db +":27017/")
 mydb = myclient["ODIN"]
