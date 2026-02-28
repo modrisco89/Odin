@@ -29,6 +29,7 @@ myColAction = mydb["admins"]
 
 reboot_cmd = [
     "ssh",
+    "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
     "ec2-user@" + ec2,
     "sudo reboot"

@@ -9,6 +9,7 @@ ec2 = os.environ.get("sIp")
 
 db_startcmd = [
     "ssh",
+    "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
     "ec2-user@" + ec2db,
     "sudo systemctl stop mongod && sudo systemctl start mongod && sudo mongod -dbpath db --bind_ip_all"

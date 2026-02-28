@@ -11,24 +11,28 @@ ec2 = os.environ.get("sIp")
 
 cpu_cmd = [
     "ssh",
+    "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
     "ec2-user@" + ec2,
     "top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}'"
 ]
 
 uptime_cmd = [    "ssh",
+    "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
    "ec2-user@"+ ec2,
    "uptime -p"
 ]
 
 mem_cmd= [    "ssh",
+    "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
    "ec2-user@" + ec2,
    "free -m | awk 'NR==2{printf \"%.2f%%\", $3*100/$2}'"
 ]
 
 stor_cmd= [    "ssh",
+    "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
    "ec2-user@" + ec2db ,
    "df -h / | awk 'NR==2 {print $5}'"
