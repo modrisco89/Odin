@@ -17,6 +17,14 @@ cpu_cmd = [
     "top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}'"
 ]
 
+bw_cmd = [
+    "ssh",
+    "-o", "StrictHostKeyChecking=no",
+    "-i", "Mike.pem",
+    "ec2-user@" + ec2,
+    "IF=enX0; RX1=$(cat /sys/class/net/$IF/statistics/rx_bytes); sleep 1; RX2=$(cat /sys/class/net/$IF/statistics/rx_bytes); awk \"BEGIN {printf \\\"%.3f Mbps\\n\\\", ($RX2-$RX1)*8/1000000}\""
+]
+
 uptime_cmd = [    "ssh",
     "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
@@ -49,7 +57,15 @@ while(True):
 	uptime = subprocess.run(uptime_cmd, capture_output=True, text=True)
 	memUsed = subprocess.run(mem_cmd, capture_output=True, text=True)
 	storUsed = subprocess.run(stor_cmd, capture_output=True, text=True)
-	mydict = {"time": datetime.now(), "CPU": cpu.stdout.strip(), "uptime": uptime.stdout.strip(), "memUsed": memUsed.stdout.strip(), "storUsed": storUsed.stdout.strip()}
+	bandwidth = subprocess.run(bw_cmd, capture_output=True, text=True)
+	mydict = {
+		"time": datetime.now(),
+		"CPU": cpu.stdout.strip(),
+		"uptime": uptime.stdout.strip(),
+		"memUsed": memUsed.stdout.strip(),
+		"storUsed": storUsed.stdout.strip(),
+		"bandwidth": bandwidth.stdout.strip()
+	}
 	x = mycol.insert_one(mydict)
 	time.sleep(30)
 
