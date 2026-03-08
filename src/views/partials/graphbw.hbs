@@ -1,0 +1,39 @@
+
+<div>
+  <canvas id="myChart2"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: [{{#each ec2s}}'{{time}}'{{#unless @last}}, {{/unless}}{{/each}}],
+      datasets: [{
+        label: 'Bandwidth',
+        data: [{{#each ec2s}}{{bandwidth}}{{#unless @last}}, {{/unless}}{{/each}}],
+        borderWidth: 1,
+        borderColor: 'rgb(155, 89, 182)'
+      }]
+    },
+    options: {
+      animation: false,
+      scaleShowLabels : false,
+      scales: {
+        x: {
+          display: false
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  setInterval(() => {
+location.reload();
+}, 10000);
+</script>
+

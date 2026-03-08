@@ -94,7 +94,7 @@ if __name__ == "__main__":
     history: List[BaseMessage] = []
 
     while True:
-        user_input = "From the dataset, tell me if I should be worried or not (note storUsed is on a seperate server known as a ""Database"", and determine a reboot only if the latest 10 data points have consecutive CPU 100% spikes in a row otherwise determine if a reboot is not needed, if uptime is uptime is between 0 to 10 minutes a reboot is not needed, Also say it like your a god, since you're name is Odin".strip()
+        user_input = "From the dataset, tell me if I should be worried or not (note storUsed is on a seperate server known as a ""Database"", and determine a reboot only if the latest 10 data points have consecutive CPU 100% spikes in a row otherwise determine if a reboot is not needed (if uptime is between 0 to 10 minutes a reboot is definitely not needed), Also say it like your a god, since you're name is Odin".strip()
         print("Odin is analzing data")
         print("Odin: ", end="", flush=True)
         response = run_agent(user_input, history)

@@ -22,7 +22,7 @@ bw_cmd = [
     "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
     "ec2-user@" + ec2,
-    "IF=enX0; RX1=$(cat /sys/class/net/$IF/statistics/rx_bytes); sleep 1; RX2=$(cat /sys/class/net/$IF/statistics/rx_bytes); awk \"BEGIN {printf \\\"%.3f Mbps\\n\\\", ($RX2-$RX1)*8/1000000}\""
+    "IF=enX0; RX1=$(cat /sys/class/net/$IF/statistics/rx_bytes); sleep 1; RX2=$(cat /sys/class/net/$IF/statistics/rx_bytes); awk \"BEGIN {printf \\\"%.3f\\n\\\", ($RX2-$RX1)*8/1000000}\""
 ]
 
 uptime_cmd = [    "ssh",
@@ -58,13 +58,14 @@ while(True):
 	memUsed = subprocess.run(mem_cmd, capture_output=True, text=True)
 	storUsed = subprocess.run(stor_cmd, capture_output=True, text=True)
 	bandwidth = subprocess.run(bw_cmd, capture_output=True, text=True)
+	bandwidthCut = bandwidth.stdout.strip()
 	mydict = {
 		"time": datetime.now(),
 		"CPU": cpu.stdout.strip(),
 		"uptime": uptime.stdout.strip(),
 		"memUsed": memUsed.stdout.strip(),
 		"storUsed": storUsed.stdout.strip(),
-		"bandwidth": bandwidth.stdout.strip()
+		"bandwidth": bandwidthCut
 	}
 	x = mycol.insert_one(mydict)
 	time.sleep(30)
