@@ -22,7 +22,7 @@ bw_cmd = [
     "-o", "StrictHostKeyChecking=no",
     "-i", "Mike.pem",
     "ec2-user@" + ec2,
-    "IF=enX0; RX1=$(cat /sys/class/net/$IF/statistics/rx_bytes); sleep 1; RX2=$(cat /sys/class/net/$IF/statistics/rx_bytes); awk \"BEGIN {printf \\\"%.3f\\n\\\", ($RX2-$RX1)*8/1000000}\""
+    "IF=eth0; RX1=$(cat /sys/class/net/$IF/statistics/rx_bytes); sleep 1; RX2=$(cat /sys/class/net/$IF/statistics/rx_bytes); awk \"BEGIN {printf \\\"%.3f\\n\\\", ($RX2-$RX1)*8/1000000}\""
 ]
 
 uptime_cmd = [    "ssh",

@@ -29,7 +29,7 @@ async function init() {
    let delayDb = await delay(10000);
    console.log("Database is Running!");
 
-   exec('python3 collector.py', (error ,stdout,stderr)=> { });
+   exec('python3 collectorV2.py', (error ,stdout,stderr)=> { });
    console.log("Collector Script Running!");
    exec('python3 agent.py', (error ,stdout,stderr)=> {});
    console.log("Agent Script Running!");
