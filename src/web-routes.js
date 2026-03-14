@@ -1,8 +1,6 @@
 import { aboutController } from "./controllers/about-controller.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
-import { venueController } from "./controllers/venue-controller.js";
-import { infoController } from "./controllers/info-controller.js";
 import { historyController } from "./controllers/history-controller.js";
 
 export const webRoutes = [
@@ -26,13 +24,6 @@ export const webRoutes = [
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addvenue", config: dashboardController.addvenue },
   { method: "GET", path: "/dashboard/deletevenue/{id}", config: dashboardController.deletevenue },
-
-  { method: "GET", path: "/venue/{id}", config: venueController.index },
-  { method: "POST", path: "/venue/{id}/addinfo", config: venueController.addinfo },
-  { method: "GET", path: "/venue/{id}/deleteinfo/{infoid}", config: venueController.deleteinfo },
-
-  { method: "GET", path: "/info/{id}/editinfo/{infoid}", config: infoController.index },
-  { method: "POST", path: "/info/{id}/updateinfo/{infoid}", config: infoController.update },
 
   { method: "GET", path: "/dashboard/clearlog", config: dashboardController.clearLog },
 ];
