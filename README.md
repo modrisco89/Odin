@@ -1,36 +1,43 @@
-# Venuely
-Assignment 1, Full Stack Web Development - Computer Science
+# Odin
+Project, Computer Science
 
 ## Project Description
-This website is for logging bands within venues
+An Autonomous cloud infrastructure management system for monitoring analysing and responding to operational events, ensuring reliaablity, scalability and resilience across multiple cloud instances
 
 ## Installation Instructions
-No installation instructions required, just an internet connection.
-https://elegant-valuable-armadillo.glitch.me/
+AWS account required with a vpc built containing autoscaled EC2 instances behind a loadbalancer, another EC2 instance with mongodb installed (database instance is not compulsory).
+
+OpenAI account required as an OpenAI key will be needed.
+
+.env file required with the following parameters:
+
+cookie_name
+cookie_password
+db=mongodb://XXX.XXX.XXX.XXX:27017/ODIN?directConnection=true
+cloudinary_name
+cloudinary_key
+cloudinary_secret
+OPENAI_API_KEY
+dbIp
+sIp
+bastion
 
 ## Usage
-1. Please add admin user using the sign up button, with the name "admin", this will set a parameter to true to determine which user is the Admin.
-2. Please add standard user using the sign up button.
-3. Enter in Venue details, select capacity from dropdown, and click the upload button to upload an image. Select "Add venue".
-4. Click on the newly added venue with the folder button, add band details and select event.
-5. Click on event to see the contact details.
-6. Click on settings to change the user details.
-7. Delete Venues or Bands with the delete buttons.
-8. Based on Latitude and Longitude, the venue will appear on the map on the dashboard, select the placemarker to open a venue band list.
-9. Select Logout
-10. Login with admin credentials created in step 1.
-11. An event log will appear.
-12. Click on settings and extra settings will appear, enabling the admin to update password for a user or delete a user.
-13. Click the logout button to finish.
+1. Clone this repository and install node.js and run it via npm start
+2. Sign up with Email and password.
+3. Use Dashboard to monitor EC2 instances metrics
+4. Odin's Comment suggest the overall health of th instances.
+5. History button at the top right shows all the comments Odin has mentioned.
+6. Use Settings to change account details or delete or change the password for another account.
     
 ## Configuration
 N/A
 
 ## Examples
-Venue owners may want to log bands playing for event promoters to bring more people to the shows
+N/A
 
 ## Documentation
-https://elegant-valuable-armadillo.glitch.me/
+N/A
 
 ## Contributing Guidelines
 N/A
@@ -42,5 +49,9 @@ N/A
 Not available
 
 ## Acknowledgements
-N/A
+Github account: techwithtim
+Github: PythonAIAgentin10Minutes
+
+
+
 
