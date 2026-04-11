@@ -1,10 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Odin Project</title>
+  <meta charset="UTF-8">
+  <title>Odin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #3b82f6;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+
+    p {
+      color: #cbd5f5;
+      max-width: 500px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Welcome to my Odin Project</h1>
-  <p>This will be my landing page.</p>
+  <div class="hero">
+    <img src="https://res.cloudinary.com/dh7gl6628/image/upload/v1742275484/IMG_20240715_130123_nca9nq.jpg" alt="Profile photo">
+
+    <h1>Hi, I'm Michael</h1>
+    <p>
+      I'm working through The Odin Project and building real web apps.
+      This site is where I showcase my progress.
+    </p>
+
+    <a class="btn" href="https://github.com/modrisco89">
+      View My GitHub
+    </a>
+  </div>
+
+  <div class="video">
+    <h2>Project Presentation</h2>
+
+    <iframe 
+      src="https://www.youtube.com/embed/MIetin3TS_8"
+      title="YouTube video player"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
 </body>
 </html>
